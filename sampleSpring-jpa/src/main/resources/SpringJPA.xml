@@ -1,0 +1,84 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"	
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/jee 
+http://www.springframework.org/schema/jee/spring-jee.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/data/jpa 
+http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/util 
+http://www.springframework.org/schema/util/spring-util.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!-- <context:component-scan base-package="com.cubic.service" />
+	<context:component-scan base-package="com.cubic.aw"></context:component-scan>
+	
+	
+	<jpa:repositories base-package="com.cubic.repo"
+		entity-manager-factory-ref="entityManagerFactory" />
+		
+		
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="niraj" />
+		<property name="password" value="password" />
+	</bean>	
+
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="showSql" value="true" />
+		<property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect" />
+		<property name="database" value="ORACLE" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="packagesToScan" value="com.cubic.entity" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean> -->
+	<!-- <bean name="productServiceBean" class="com.cubic.service.ProductServiceImpl"  scope="prototype" ></bean>
+	
+	<bean name="psBeanTarget" class="com.cubic.service.ProductServiceImpl"  scope="prototype" ></bean> -->
+
+	<import resource="SpringJPAOne.xml"/>
+	
+	<bean name="psWalmart" class="com.cubic.service.ProductServiceImpl"  parent="basePS" scope="prototype" >
+	</bean>
+	
+	<bean class="com.cubic.vo.CustomerVO">
+	<constructor-arg index="0" value="100"></constructor-arg>
+	<constructor-arg index="1" value="myname"></constructor-arg>
+	<constructor-arg index="2" value="Texas"></constructor-arg>
+	<constructor-arg index="3" ref="catRef"></constructor-arg>
+	</bean>
+	
+	<bean name="catRef" class="com.cubic.vo.CategoryVO">
+	<property name="name" value="TestCategory"></property>
+	</bean>
+	
+	<context:component-scan base-package="com.cubic.aw,com.cubic.jpaaspect,com.cubic.jpatransaction"></context:component-scan>
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	
+</beans>
