@@ -11,9 +11,10 @@ public class App
         System.out.println( "Hello World!" );
     }
 
-  public static toSurnsir()
+  public static String toSurnsir()
 {
-
+System.out.println("hello");
+return "hello";
 
 }
 
