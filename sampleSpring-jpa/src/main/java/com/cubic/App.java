@@ -11,9 +11,9 @@ public class App
         System.out.println( "Hello World!" );
     }
 
-  public static toSurnsir()
+  public static void toSurnsir()
 {
-
+//Conflicting merge conflict
 
 }
 
